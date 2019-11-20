@@ -21,19 +21,21 @@
       >
         <p class="tabs__content-text">{{content.content}}</p>
         <br />
-        <label v-if="content.need_initials" v-bind:for="content.content">
-          <strong v-if="content.signed" class="initials">{{initials}}</strong>
-          <input
-            v-else
-            type="checkbox"
-            v-bind:value="index"
-            v-bind:id="content.content"
-            v-on:change="content.signed = true"
-          />
-          <em
-            class="subscribe"
-          >I certify that I read and write English and have read and fully understand this consent for surgery.</em>
-        </label>
+        <div class="tabs__content-label">
+          <label v-if="content.need_initials" v-bind:for="content.content">
+            <strong v-if="content.signed" class="initials">{{initials}}</strong>
+            <input
+              v-else
+              type="checkbox"
+              v-bind:value="index"
+              v-bind:id="content.content"
+              v-on:change="content.signed = true"
+            />
+            <em
+              class="subscribe"
+            >I certify that I read and write English and have read and fully understand this consent for surgery.</em>
+          </label>
+        </div>
       </li>
     </ul>
   </div>
@@ -123,14 +125,23 @@ export default {
   }
 }
 
+.tabs__content-label {
+  transition: all 0.2s ease-in-out;
+  &:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+  }
+}
+
 .tabs__content-item {
   border-bottom: 1px solid silver;
-  padding: 20px 0;
+  padding: 20px;
+  margin: 0px 20px;
 }
 
 .tabs__content {
   margin: 0;
-  padding: 15px;
+  padding: 0;
   box-shadow: rgba(0, 0, 0, 0.4) 0 3px 10px;
   background: #ececec;
 }
