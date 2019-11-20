@@ -39,9 +39,7 @@ export default {
 .room__list {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  margin: 0;
-  padding: 0;
+  justify-content: space-evenly;
   list-style: none;
 }
 </style>

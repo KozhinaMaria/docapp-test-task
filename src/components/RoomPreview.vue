@@ -123,7 +123,7 @@ export default {
 
         const timeNew = moment(this.waitingTime.value).add("seconds", -1);
         this.waitingTime.value = timeNew;
-        this.waitingTime.formated = timeNew.format("HH:mm:SS");
+        this.waitingTime.formated = timeNew.format("HH:mm:ss");
       }, 1000);
     }
   }
@@ -134,6 +134,8 @@ export default {
 .room__item {
   margin: 20px;
   max-width: 200px;
+  box-shadow: rgba(0, 0, 0, 0.4) 0 3px 10px;
+  padding: 18px 20px;
 
   &:hover {
     background-color: grey;

@@ -1,21 +1,23 @@
 <template>
   <div>
     <nav>
-      <ul>
-        <a
+      <ul class="tabs__list">
+        <li
+          class="tabs__item"
+          :class="{active : selectedTab === tab}"
           v-for="(tab, index) in checkedForms"
           :key="`item-${index}`"
           v-text="getTabName(tab)"
           @click="selectedTab = tab;getConsentDetails();"
-        ></a>
+        ></li>
       </ul>
     </nav>
-    <ul>
+    <ul class="tabs__content">
       <li v-for="(content, index) in contentTab" :key="index" v-bind:id="selectedTab">
         {{content.content}}
         <br />
         <label v-if="content.need_initials" v-bind:for="index">
-          <strong v-if="contentTab[index].signed">{{initials}}</strong>
+          <strong v-if="content.signed">{{initials}}</strong>
           <input
             v-else
             type="checkbox"
@@ -36,9 +38,10 @@ import get from "../api/get";
 export default {
   data() {
     return {
-      contentTab: {},
+      contentTab: [],
       selectedTab: "",
-      signedList: []
+      signedList: [],
+      tabList: {}
     };
   },
   props: {
@@ -49,7 +52,7 @@ export default {
   watch: {
     checkedForms() {
       this.selectedTab = this.checkedForms[0];
-      this.contentTab = {};
+      this.contentTab = [];
       this.getConsentDetails();
     }
   },
@@ -60,14 +63,23 @@ export default {
   methods: {
     getConsentDetails() {
       if (this.selectedTab) {
-        get
-          .getConsentDetails(this.selectedTab)
-          .then(resp => {
-            this.contentTab = resp;
-          })
-          .catch(error => {
-            console.error(error);
-          });
+        if (!this.tabList[this.selectedTab]) {
+          get
+            .getConsentDetails(this.selectedTab)
+            .then(resp => {
+              const mapped = resp.map(r => ({
+                ...r,
+                signed: false
+              }));
+              this.contentTab = mapped;
+              this.tabList[this.selectedTab] = mapped;
+            })
+            .catch(error => {
+              console.error(error);
+            });
+        } else {
+          this.contentTab = this.tabList[this.selectedTab];
+        }
       }
     },
     getTabName(tab) {
@@ -75,10 +87,36 @@ export default {
       return find ? find.short_title : "";
     },
     showInitials(el) {
-      el.target.parentElement.append("Some text", document.createElement("p"));
-      el.target.style.display = "none";
       this.contentTab[el.target.id].signed = true;
     }
   }
 };
 </script>
+<style lang="scss" scoped>
+.tabs__list {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 0;
+}
+.tabs__item {
+  flex-grow: 1;
+  background-color: grey;
+  opacity: 0.5;
+  box-shadow: 1px 1px 1px black;
+  padding: 5px;
+  text-align: center;
+
+  cursor: pointer;
+
+  &:hover,
+  &.active {
+    opacity: 0.7;
+  }
+}
+
+.tabs__content {
+  //margin: 20px;
+  padding: 0;
+  //background-color: grey;
+}
+</style>

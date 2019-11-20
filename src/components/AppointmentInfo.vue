@@ -70,7 +70,7 @@ export default {
         weight,
         bmi
       } = this.item.appointment.vital_signs;
-      return `HT: ${height_ft}'${height_in}'', WT: ${weight}lbs., BMI: ${bmi}}`;
+      return `HT: ${height_ft}'${height_in}'', WT: ${weight}lbs., BMI: ${bmi}`;
     },
     fullPatientName() {
       if (!this.item || !this.item.appointment) {
