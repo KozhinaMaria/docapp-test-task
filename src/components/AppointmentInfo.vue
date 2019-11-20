@@ -1,10 +1,13 @@
 <template>
   <div v-if="isLoading">Loading appointment data...</div>
   <div v-else>
-    <p>Room {{roomNumber}}</p>
-    <p>App Date {{appointmentDate}}</p>
-    <p>Vital signs: {{vitalData}}</p>
-    <p>{{fullPatientName}}</p>
+    <div class="appointment__content">
+      <p>Room: {{roomNumber}}</p>
+      <p>Appointment Date: {{appointmentDate}}</p>
+      <p>Vital signs: {{vitalData}}</p>
+      <p>Patient: {{fullPatientName}}</p>
+    </div>
+
     <ConsentForms :initials="initials" />
   </div>
 </template>
@@ -116,3 +119,11 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.appointment__content {
+  box-shadow: rgba(0, 0, 0, 0.4) 0 3px 10px;
+  border-radius: 25px 0px 25px 5px;
+  padding: 18px 20px;
+}
+</style>

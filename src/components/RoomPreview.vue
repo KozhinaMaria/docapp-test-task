@@ -14,13 +14,14 @@
         <td>{{roomStatus}}</td>
       </tr>
       <tr>
-        <td>Time</td>
-        <td>{{appointmentTime}}</td>
-      </tr>
-      <tr>
-        <td>Starts in:</td>
+        <td>Starts:</td>
         <td>{{waitingTime.formated}}</td>
       </tr>
+      <tr>
+        <td>Time:</td>
+        <td>{{appointmentTime}}</td>
+      </tr>
+
       <tr>
         <td>D:</td>
         <td>{{docName}}</td>
@@ -136,10 +137,12 @@ export default {
   max-width: 200px;
   box-shadow: rgba(0, 0, 0, 0.4) 0 3px 10px;
   padding: 18px 20px;
+  transition: all 0.2s ease-in-out;
 
   &:hover {
-    background-color: grey;
+    background: #ececec;
     cursor: pointer;
+    transform: scale(1.1);
   }
 }
 </style>

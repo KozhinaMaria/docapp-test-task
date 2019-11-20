@@ -1,23 +1,25 @@
 <template>
   <div>
-    <ul>
-      <div v-if="consentForms.length === 0">No consent forms available.</div>
-      <li v-for="(consentForm, index) in consentForms" :key="index">
-        <label v-bind:for="consentForm.code">
-          <input
-            type="checkbox"
-            v-bind:value="consentForm.code"
-            v-bind:id="consentForm.code"
-            v-model="checkedForms"
-            :checked="false"
-          />
-          <span>{{ consentForm.title }}</span>
-        </label>
-      </li>
-    </ul>
+    <div class="forms__content">
+      <ul class="forms__list">
+        <div v-if="consentForms.length === 0">No consent forms available.</div>
+        <li v-for="(consentForm, index) in consentForms" :key="index">
+          <label v-bind:for="consentForm.code">
+            <input
+              type="checkbox"
+              v-bind:value="consentForm.code"
+              v-bind:id="consentForm.code"
+              v-model="checkedForms"
+              :checked="false"
+            />
+            <span>{{ consentForm.title }}</span>
+          </label>
+        </li>
+      </ul>
 
-    <button @click="toggleForms">Select/UnSelect</button>
-    <button v-if="showSignBtn" @click="showTabs">Sign</button>
+      <button @click="toggleForms">Select/UnSelect</button>
+      <button v-if="showSignBtn" @click="showTabs">Sign</button>
+    </div>
     <TabsContainer
       :checkedForms="checkedForms"
       :consentForms="consentForms"
@@ -81,3 +83,16 @@ export default {
   }
 };
 </script>
+<style lang="scss" scoped>
+.forms__content {
+  box-shadow: rgba(0, 0, 0, 0.4) 0 1px 5px;
+  background-color: #c8c8c896;
+  margin: 20px;
+  padding: 10px;
+}
+
+.form__list {
+  padding: 0;
+  margin: 5px;
+}
+</style>

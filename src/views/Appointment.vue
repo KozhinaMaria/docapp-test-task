@@ -23,8 +23,29 @@ export default {
 </script>
 
 <style lang="scss">
+body {
+  line-height: 1.5em;
+}
 ul {
   list-style: none;
-  margin: 0;
+}
+button {
+  border: none;
+  padding: 8px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  background-color: white;
+  color: black;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.6) 0 3px 12px;
+  transition: all 0.2s ease-in-out;
+}
+
+button:hover {
+  background-color: #555555;
+  color: white;
+  transform: scale(1.1);
 }
 </style>
