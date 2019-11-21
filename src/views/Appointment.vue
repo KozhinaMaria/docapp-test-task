@@ -31,6 +31,7 @@ ul {
 }
 button {
   border: none;
+  outline: none;
   padding: 8px;
   text-align: center;
   text-decoration: none;
@@ -41,6 +42,12 @@ button {
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.6) 0 3px 12px;
   transition: all 0.2s ease-in-out;
+  margin: 5px;
+
+  &:focus {
+    background-color: #555555;
+    color: white;
+  }
 }
 
 button:hover {
